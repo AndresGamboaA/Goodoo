@@ -13,7 +13,7 @@ bg_color = Color(0.6, 0, 0.0745098, 1)
 Button/styles/normal = SubResource( "StyleBoxFlat_kgc82" )
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_5dsu0"]
-bg_color = Color(0.133333, 0.6, 0.0980392, 1)
+bg_color = Color(0.196078, 0.6, 0.490196, 1)
 
 [sub_resource type="Theme" id="Theme_by1pc"]
 Button/styles/normal = SubResource( "StyleBoxFlat_5dsu0" )
