@@ -35,7 +35,7 @@ func change_basic_for_custom(current:BasicComponent, next:CustomComponent):
 		old_control.queue_free()
 	else:
 		set_properties(current.control, current.input, next_gui.input)
-	#current.input = next_gui.input
+	current.input = next_gui.input
 	
 	for child in next.get_gui().get_children():
 		render(next_control, child)
@@ -48,6 +48,7 @@ func change_basic_for_custom(current:BasicComponent, next:CustomComponent):
 	next.container.add_child(next_gui)
 	next.get_gui().control = next_control
 	current.queue_free()
+	next.ready()
 
 func change_custom_for_basic(current:CustomComponent, next:BasicComponent):
 	
@@ -155,6 +156,7 @@ func change_custom_for_dif_custom(current:CustomComponent, next:CustomComponent)
 	container.free()
 	current.control.free()
 	current.free()
+	next.ready()
 
 
 func update_basic(current:BasicComponent, next:BasicComponent):
@@ -163,6 +165,8 @@ func update_basic(current:BasicComponent, next:BasicComponent):
 
 
 func update_custom(current:CustomComponent, next:CustomComponent):
+	if current.type == "sidebar":
+		print("updating sidebar from goodoo")
 	current.input = next.input
 	next.state = current.state
 	next.complete()
@@ -208,6 +212,7 @@ func create_control(type:String, properties:Dictionary) -> Control:
 	# Creates a control based on the type with the specified properties
 	var node:Control
 	match  type:
+		"control"        :node = Control.new()
 		"container"      :node = PanelContainer.new()
 		"aspect_radio"   :node = AspectRatioContainer.new()
 		"center"         :node = CenterContainer.new()

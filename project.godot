@@ -24,22 +24,46 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://goodoo/component.gd"
 }, {
+"base": "CustomComponent",
+"class": &"Counter",
+"language": &"GDScript",
+"path": "res://components/counter.gd"
+}, {
 "base": "Component",
 "class": &"CustomComponent",
 "language": &"GDScript",
 "path": "res://goodoo/custom_component.gd"
 }, {
 "base": "CustomComponent",
+"class": &"Installation",
+"language": &"GDScript",
+"path": "res://components/pages/installation.gd"
+}, {
+"base": "CustomComponent",
+"class": &"Introduction",
+"language": &"GDScript",
+"path": "res://components/pages/introduction.gd"
+}, {
+"base": "CustomComponent",
 "class": &"SideBar",
 "language": &"GDScript",
 "path": "res://components/sidebar.gd"
+}, {
+"base": "CustomComponent",
+"class": &"TopBar",
+"language": &"GDScript",
+"path": "res://components/topbar.gd"
 }]
 _global_script_class_icons={
 "App": "",
 "BasicComponent": "",
 "Component": "",
+"Counter": "",
 "CustomComponent": "",
-"SideBar": ""
+"Installation": "",
+"Introduction": "",
+"SideBar": "",
+"TopBar": ""
 }
 
 [application]
@@ -58,5 +82,6 @@ Presets="*res://presets.gd"
 
 [display]
 
-window/size/viewport_width=500
-window/size/viewport_height=350
+window/size/viewport_width=600
+window/size/viewport_height=450
+window/vsync/vsync_mode=0
