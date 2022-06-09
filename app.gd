@@ -10,7 +10,7 @@ func gui():
 	Goo.center({"preset":"center"},[
 		Goo.rich_label({
 			"preset":"rich",
-			"text":"[center][wave]Goodoo[/wave][/center]"
+			"text":"[center][wave]Test[/wave][/center]"
 		})
 	])
 
