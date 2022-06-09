@@ -4,13 +4,15 @@ class_name App
 
 func _init():
 	super("app")
+	state = {"sideBarVisible":false}
+
+func toggleSideBar():
+	state.sideBarVisible = not state.sideBarVisible
+	update_gui()
 
 func gui():
 	return\
-	Goo.center({"preset":"center"},[
-		Goo.rich_label({
-			"preset":"rich",
-			"text":"[center][wave]Test[/wave][/center]"
-		})
+	Goo.hbox({"preset":"hbox"},[
+#		SideBar.new({"visible":state.sideBarVisible}),
+		Goo.scrollbox({"preset":"scroll"},[])
 	])
-

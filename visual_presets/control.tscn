@@ -11,14 +11,41 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 theme = SubResource( "Theme_lq6a3" )
 
-[node name="center" type="CenterContainer" parent="."]
+[node name="_c" type="VBoxContainer" parent="."]
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="rich" type="RichTextLabel" parent="center"]
-offset_left = 250.0
-offset_top = 175.0
-offset_right = 250.0
-offset_bottom = 175.0
-bbcode_enabled = true
-fit_content_height = true
+[node name="Control" type="Control" parent="_c"]
+minimum_size = Vector2(0, 200)
+offset_right = 500.0
+offset_bottom = 200.0
+grow_horizontal = 2
+metadata/_edit_layout_mode = 1
+
+[node name="_containers" type="Control" parent="_c"]
+minimum_size = Vector2(0, 200)
+offset_top = 204.0
+offset_right = 500.0
+offset_bottom = 404.0
+grow_horizontal = 2
+metadata/_edit_layout_mode = 1
+
+[node name="vbox" type="VBoxContainer" parent="_c/_containers"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="hbox" type="HBoxContainer" parent="_c/_containers"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="sidebar-scroll" type="ScrollContainer" parent="_c/_containers"]
+offset_right = 22.0
+offset_bottom = 142.0
+
+[node name="scroll" type="ScrollContainer" parent="_c/_containers"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="color" type="ColorRect" parent="_c/_containers"]
+anchor_right = 1.0
+anchor_bottom = 1.0
