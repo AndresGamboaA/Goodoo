@@ -1,10 +1,15 @@
 extends Node
 
+@onready
+var menu_icon = preload("res://menu_icon.png")
+var close_menu_icon = preload("res://close_menu_icon.png")
+
 func initialize_presets():
-	pass
-	#label
-#	var label = Label.new()
-#	label.vertical_alignment = VERTICAL_ALIGNMENT_CENTER
-#	label.horizontal_alignment = HORIZONTAL_ALIGNMENT_CENTER
-#	label.name = "centeredLabel"
-#	Goo.create_presets_from_control(label)
+	var button = Button.new()
+	button.name = "icon-menu"
+	button.icon = menu_icon
+	button.mouse_default_cursor_shape = Control.CURSOR_POINTING_HAND
+	Goo.create_presets_from_control(button)
+	button.name = "icon-close-menu"
+	button.icon = close_menu_icon
+	Goo.create_presets_from_control(button)

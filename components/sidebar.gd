@@ -45,7 +45,7 @@ func options():
 func gui():
 	return \
 	Goo.scrollbox({preset="sidebar-scroll", id="scroll"}, [
-		Goo.color_rect({preset="color-cc-exp",color=Color.BLACK}),
+		Goo.color_rect({preset="color-cc-exp",color=Color("#0f141a")}),
 		Goo.margin({preset="margin-cc-exp",id="mar", const_margin_all=8},[
 			Goo.vbox({preset="vbox-cc-exp", id="hbox"}, 
 				options()

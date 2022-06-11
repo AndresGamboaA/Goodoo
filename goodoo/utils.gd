@@ -13,6 +13,7 @@ const EXCEPTIONS = [
 	"rotation",
 	"position",
 	"global_position", 
+	"multiplayer",
 	"text"]
 
 func dict_to_json(dict):

@@ -32,6 +32,13 @@ func get_option(_name):
 		if option.name == _name:
 			return option
 
+func current_page():
+	match get_current_option().name:
+		"Introduction":
+			return Introduction.new()
+		"Installation":
+			return Installation.new()
+
 func gui():
 	return\
 	Goo.vbox({preset="vbox-exp"},[
@@ -43,7 +50,7 @@ func gui():
 			}),
 			Goo.vbox({preset="vbox-cc-exp"},[
 				TopBar.new({on_menu_buttom_toggled=toggleSideBar}),
-#				current_page()
+				current_page()
 			])
 		])
 	])
