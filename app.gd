@@ -5,10 +5,10 @@ class_name App
 func _init():
 	super("app")
 	state = {
-		"sideBarVisible":false,
-		"options":[
-			{"name":"Introduction", "current":true},
-			{"name":"Installation", "current":false},
+		sideBarVisible=false,
+		options=[
+			{name="Introduction", current=true},
+			{name="Installation", current=false},
 		]
 	}
 
@@ -17,6 +17,8 @@ func toggleSideBar():
 	update_gui()
 
 func handle_option_pressed(_name):
+	print("_________")
+	print(Utils.dict_to_json(state))
 	get_current_option().current = false
 	get_option(_name).current = true
 	update_gui()
@@ -40,15 +42,15 @@ func current_page():
 
 func gui():
 	return\
-	Goo.vbox({"preset":"vbox-exp"},[
-		Goo.hbox({"preset":"hbox-cc-exp"},[
+	Goo.vbox({preset="vbox-exp"},[
+		Goo.hbox({preset="hbox-cc-exp"},[
 			SideBar.new({
-				"visible":state.sideBarVisible, 
-				"options":state.options,
-				"on_option_pressed":handle_option_pressed
+				visible=state.sideBarVisible, 
+				options=state.options,
+				on_option_pressed=handle_option_pressed
 			}),
-			Goo.vbox({"preset":"vbox-cc-exp"},[
-				TopBar.new({"on_menu_buttom_toggled":toggleSideBar}),
+			Goo.vbox({preset="vbox-cc-exp"},[
+				TopBar.new({on_menu_buttom_toggled=toggleSideBar}),
 				current_page()
 			])
 		])

@@ -5,16 +5,21 @@ class_name BasicComponent
 
 func _init(_input, _type, children):
 	type = _type
-	input = _input
+	input = _input.duplicate(true)
 	for child in children:
 		add_child(child)
 
+
 func get_control(value):
+	print("looking "+value+" in " + type)
 	for child in get_children():
 		if child.input.has("id"):
 			if child.input.id == value:
 				return child.control
-		return child.get_control(value)
+		var found = child.get_control(value)
+		if found:
+			return found
+	return null
 
 func get_data():
 	var children_data = []
@@ -26,6 +31,7 @@ func get_data():
 		"type": type,
 		"input": input,
 		"children": children_data,
-		"control": control
+		"control": control,
+		"parent": control.get_parent()
 	}
 	return data

@@ -10,6 +10,8 @@ func diff(current:Component, next:Component) -> void:
 			change_basic_for_custom(current, next)
 	else:
 		if not next is BasicComponent: 
+			if current.type == "sidebar":
+				print("diffing sidebar")
 			diff_custom(current, next)
 		else:
 			change_custom_for_basic(current, next)
@@ -29,7 +31,8 @@ func change_basic_for_custom(current:BasicComponent, next:CustomComponent):
 		child.queue_free()
 	
 	if next_gui.type != current.type:
-		var new_control = create_control(next_gui.type, next_gui.input)
+		var cc = current.control.get_parent() is Container
+		var new_control = create_control(next_gui.type, next_gui.input,cc)
 		current.control.replace_by(new_control)
 		next_control = new_control
 		old_control.queue_free()
@@ -48,6 +51,7 @@ func change_basic_for_custom(current:BasicComponent, next:CustomComponent):
 	next.container.add_child(next_gui)
 	next.get_gui().control = next_control
 	current.queue_free()
+	await get_tree().process_frame
 	next.ready()
 
 func change_custom_for_basic(current:CustomComponent, next:BasicComponent):
@@ -59,7 +63,8 @@ func change_custom_for_basic(current:CustomComponent, next:BasicComponent):
 	
 	if current.get_gui().type != next.type:
 		var old = current.get_gui().control
-		var new = create_control(next.type, next.input)
+		var cc = old.get_parent() is Container
+		var new = create_control(next.type, next.input,cc)
 		current.get_gui().control.replace_by(new)
 		old.queue_free()
 		next_control = new
@@ -75,18 +80,18 @@ func change_custom_for_basic(current:CustomComponent, next:BasicComponent):
 	current.control.free()
 	current.replace_by(next)
 	next.control = next_control
-	print("next basic childre ")
-	for child in next.get_children():
-		print(child)
-	print("__________fin next basic children")
 	current.queue_free()
 
 
 func diff_basic(current:BasicComponent, next:BasicComponent):
 	if current.type != next.type:
+		if current.type == "button":
+			print("changing button")
 		change_basic_for_dif_basic(current, next)
 		return
 	elif current.input.hash() != next.input.hash():
+		if current.type == "button":
+			print("updating button " + current.input.text)
 		update_basic(current, next)
 	
 	var current_children = current.get_children()
@@ -100,14 +105,19 @@ func diff_basic(current:BasicComponent, next:BasicComponent):
 
 func diff_custom(current:CustomComponent, next:CustomComponent):
 	if current.type != next.type:
+		if current.type == "sidebar":
+			print("change to custom")
 		change_custom_for_dif_custom(current, next)
 	elif current.input.hash() != next.input.hash():
+		if current.type == "sidebar":
+			print("type diff. updating")
 		update_custom(current, next)
 
 
 func change_basic_for_dif_basic(current:BasicComponent, next:BasicComponent):
 	var old = current.control
-	var new = create_control(next.type, next.input)
+	var cc = old.get_parent() is Container
+	var new = create_control(next.type, next.input,cc)
 	current.control.replace_by(new)
 	current.control = new
 	old.queue_free()
@@ -133,7 +143,8 @@ func change_custom_for_dif_custom(current:CustomComponent, next:CustomComponent)
 		child.queue_free()
 	
 	if next_gui.type != current_gui.type:
-		var new_control = create_control(next_gui.type, next_gui.input)
+		var cc = old_control.get_parent() is Container
+		var new_control = create_control(next_gui.type, next_gui.input,cc)
 		current_gui.control.replace_by(new_control)
 		next_control = new_control
 		old_control.queue_free()
@@ -160,7 +171,10 @@ func change_custom_for_dif_custom(current:CustomComponent, next:CustomComponent)
 
 
 func update_basic(current:BasicComponent, next:BasicComponent):
-	set_properties(current.control, current.input, next.input)
+	var cc = current.control.get_parent() is Container
+	print("CCCCCCCCCCC: " + str(cc))
+	print("parent " + str(current.control.get_parent()))
+	set_properties(current.control, current.input, next.input,cc)
 	current.input = next.input
 
 
@@ -171,8 +185,9 @@ func update_custom(current:CustomComponent, next:CustomComponent):
 	next.state = current.state
 	next.complete()
 	diff(current.get_gui(), next.get_gui())
-	current.updated()
 	next.queue_free()
+	await get_tree().process_frame
+	current.updated()
 
 
 func look_for_new_children(current:BasicComponent, next:BasicComponent) -> void:
@@ -197,7 +212,8 @@ func look_for_new_children(current:BasicComponent, next:BasicComponent) -> void:
 func render(parent:Control, component:Component) -> void:
 	# Renders the component to the scene
 	if component is BasicComponent:
-		component.control = create_control(component.type, component.input)
+		var cc = parent is Container
+		component.control = create_control(component.type, component.input,cc)
 		parent.add_child(component.control)
 		for child in component.get_children():
 			render(component.control, child)
@@ -205,10 +221,11 @@ func render(parent:Control, component:Component) -> void:
 		component.complete()
 		component.parent_control = parent
 		render(parent, component.get_gui())
+		await get_tree().process_frame
 		component.ready()
 
 
-func create_control(type:String, properties:Dictionary) -> Control:
+func create_control(type:String, properties:Dictionary,cc=false) -> Control:
 	# Creates a control based on the type with the specified properties
 	var node:Control
 	match  type:
@@ -256,35 +273,41 @@ func create_control(type:String, properties:Dictionary) -> Control:
 		"texture_rect"   :node = TextureRect.new()
 		"tree"           :node = Tree.new()
 		
-	set_properties(node, {}, properties)
+	set_properties(node, {}, properties,cc)
 	return node
 
 
-func set_properties(node:Control, last_properties, properties:Dictionary) -> void:
+func set_properties(node:Control, last_properties, properties:Dictionary,cc=false) -> void:
 	for key in properties.keys():
+		if cc and (key.begins_with("anchor") or key == "layout_mode" or key.begins_with("offset")):
+			print("SKIPING___***********>>>>>>>>")
+			continue
 		if key == "id": continue
 		if key == "preset":
 			if last_properties.has("preset"):
 				if last_properties["preset"] == properties["preset"]:
-					return
-			var presets = properties.preset.split(" ")
-			var last_p = []
-			if last_properties.has("preset"):
-				last_p = last_properties.preset.split(" ")
-			for preset in presets:
-				if last_p.count(preset) > 0: continue
-				if Goo.get_preset(preset):
-					set_preset(node,preset)
+					continue
+#			var presets = properties.preset.split(" ")
+#			var last_p = []
+#			if last_properties.has("preset"):
+#				last_p = last_properties.preset.split(" ")
+#			for preset in presets:
+#				if last_p.count(preset) > 0: continue
+			if Goo.get_preset(properties.preset):
+				set_preset(node,properties.preset,cc)
 		
 		elif last_properties.has(key) and last_properties[key] == properties[key]:
 			continue
 			
 		elif key.begins_with("on_"):
 			node[key.substr(3)].connect(properties[key])
+			print(properties[key])
 		else:
-			set_property(node, properties, key)
+			if not( cc and (key.begins_with("anchor") or key == "layout_mode") or key.begins_with("offset")):
+				set_property(node, properties, key)
 
 func set_property(node:Control, properties:Dictionary, key:String) -> void:
+	print("seting " + key + " to " + str(node))
 	if node is MarginContainer:
 		if key == "const_margin_right":
 			node.add_theme_constant_override("margin_right", properties[key])
@@ -300,12 +323,16 @@ func set_property(node:Control, properties:Dictionary, key:String) -> void:
 			node.add_theme_constant_override("margin_top", properties[key])
 			node.add_theme_constant_override("margin_bottom", properties[key])
 	if key == "theme":
+		print("theme set")
 		node.theme = properties[key]
-	elif node.get(key) != null:
+	if node.get(key) != null:
 		node[key] = properties[key]
 
 
-func set_preset(node:Control, preset:String) -> void:
+func set_preset(node:Control, preset:String,cc=false) -> void:
+	print("setting preset to " + str(node))
+	print(Utils.dict_to_json(Goo.get_preset(preset)))
 	var preset_props = Goo.get_preset(preset)
 	for key in preset_props.keys():
-		set_property(node, preset_props, key)
+		if not(cc and (key.begins_with("anchor") or key == "layout_mode") or key.begins_with("offset")):
+			set_property(node, preset_props, key)

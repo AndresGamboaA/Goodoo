@@ -14,7 +14,39 @@ func extract_properties(control:Control) -> Dictionary:
 		props.const_margin_bottom = control.get_theme_constant("margin_bottom")
 		
 	for prop in dict:
-		if ["Transform", "size", "position", "global_position", "text"].count(prop.name)>0: 
+#		if prop.name != "theme":
+#			continue
+#		if ["theme",
+#			"size_flags_horizontal",
+#			"size_flags_vertical",
+#			"layout_mode",
+#			"anchors_preset",
+#			"anchor_left",
+#			"anchor_top",
+#			"anchor_right",
+#			"offset_right",
+#			"offset_left",
+#			"offset_bottom",
+#			"offset_top",
+#			"anchor_bottom",
+#			].count(prop.name) <1:
+#			continue
+		if [
+			"Transform", 
+			"transform",
+			"_import_path",
+#			"layout_mode",
+#			"size_flags_horizontal",
+#			"size_flags_vertical",
+			"unique_name_in_owner",
+			"scene_file_path",
+			"owner",
+			"position",
+			"size",
+			"scale",
+			"global_position",
+			"rotation",
+			"text"].count(prop.name)>0: 
 			continue
 		if control.get(prop.name) != null:
 			props[prop.name] = control.get(prop.name)

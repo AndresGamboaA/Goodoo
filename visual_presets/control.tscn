@@ -1,5 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://bxmeflxwv6g45"]
 
+[ext_resource type="Theme" uid="uid://r5fq7cl3p17k" path="res://themes/current.tres" id="1_t6d5m"]
 [ext_resource type="FontData" uid="uid://dubyq8xosm8yk" path="res://fonts/Quicksand-Bold.ttf" id="1_wtrbh"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wlofd"]
@@ -8,35 +9,19 @@ bg_color = Color(0.207843, 0.235294, 0.6, 1)
 [sub_resource type="Theme" id="Theme_lq6a3"]
 PanelContainer/styles/panel = SubResource( "StyleBoxFlat_wlofd" )
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rpbbc"]
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mya38"]
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_pwv8m"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+[sub_resource type="Theme" id="Theme_d5hxd"]
+Button/styles/normal = SubResource( "StyleBoxFlat_mya38" )
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gjv0b"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rov4k"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_hyq8a"]
-bg_color = Color(0.6, 0.6, 0.6, 0)
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_485sl"]
 
-[sub_resource type="Theme" id="Theme_d5cgw"]
-Button/colors/font_hover_color = Color(0.788235, 0.619608, 0.192157, 1)
-Button/font_sizes/font_size = 18
-Button/styles/focus = SubResource( "StyleBoxFlat_rpbbc" )
-Button/styles/hover = SubResource( "StyleBoxFlat_pwv8m" )
-Button/styles/normal = SubResource( "StyleBoxFlat_gjv0b" )
-Button/styles/pressed = SubResource( "StyleBoxFlat_hyq8a" )
-
-[sub_resource type="Theme" id="Theme_8a4g2"]
-Button/colors/font_color = Color(0.788235, 0.619608, 0.192157, 1)
-Button/colors/font_focus_color = Color(0.788235, 0.619608, 0.192157, 1)
-Button/colors/font_hover_color = Color(0.788235, 0.619608, 0.192157, 1)
-Button/font_sizes/font_size = 18
-Button/styles/focus = SubResource( "StyleBoxFlat_rpbbc" )
-Button/styles/hover = SubResource( "StyleBoxFlat_pwv8m" )
-Button/styles/normal = SubResource( "StyleBoxFlat_gjv0b" )
-Button/styles/pressed = SubResource( "StyleBoxFlat_hyq8a" )
+[sub_resource type="Theme" id="Theme_pevwi"]
+Button/styles/focus = SubResource( "StyleBoxFlat_rov4k" )
+Button/styles/normal = SubResource( "StyleBoxFlat_485sl" )
 
 [sub_resource type="Font" id="Font_7d03p"]
 data/0 = ExtResource( "1_wtrbh" )
@@ -80,11 +65,17 @@ size_flags_horizontal = 3
 [node name="hbox" type="HBoxContainer" parent="app-hbox/app-scroll"]
 clip_contents = true
 offset_right = 596.0
+offset_bottom = 450.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
+alignment = 2
 
 [node name="vbox" type="VBoxContainer" parent="app-hbox/app-scroll"]
+clip_contents = true
 offset_right = 596.0
+offset_bottom = 450.0
 size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 offset_right = 40.0
@@ -111,6 +102,11 @@ anchor_bottom = 1.0
 [node name="sidebar-scroll" type="ScrollContainer" parent="_groups/_Containers/Control/hbox-exp"]
 offset_bottom = 10.0
 horizontal_scroll_mode = 3
+
+[node name="cl" type="ColorRect" parent="_groups/_Containers/Control/hbox-exp/sidebar-scroll"]
+offset_bottom = 10.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
 
 [node name="scroll-cc-exp" type="ScrollContainer" parent="_groups/_Containers/Control/hbox-exp"]
 offset_left = 4.0
@@ -153,22 +149,24 @@ size_flags_vertical = 3
 
 [node name="control-cc" type="Control" parent="_groups/_Containers/Control/vbox-exp"]
 clip_contents = true
+minimum_size = Vector2(0, 38)
 offset_top = 16.0
 offset_right = 600.0
-offset_bottom = 16.0
+offset_bottom = 54.0
 size_flags_horizontal = 3
+size_flags_vertical = 4
 
 [node name="center-cc" type="CenterContainer" parent="_groups/_Containers/Control/vbox-exp"]
 clip_contents = true
-offset_top = 20.0
+offset_top = 58.0
 offset_right = 600.0
-offset_bottom = 20.0
+offset_bottom = 58.0
 
 [node name="margin-cc-exp" type="MarginContainer" parent="_groups/_Containers/Control/vbox-exp"]
 clip_contents = true
-offset_top = 24.0
+offset_top = 62.0
 offset_right = 600.0
-offset_bottom = 24.0
+offset_bottom = 62.0
 size_flags_horizontal = 3
 size_flags_vertical = 3
 theme_override_constants/margin_left = 40
@@ -181,35 +179,44 @@ anchor_bottom = 1.0
 [node name="_buttoms" type="VBoxContainer" parent="_groups"]
 offset_top = 14.0
 offset_right = 600.0
-offset_bottom = 82.0
+offset_bottom = 102.0
 
 [node name="basic" type="Button" parent="_groups/_buttoms"]
 offset_right = 600.0
-offset_bottom = 8.0
 mouse_default_cursor_shape = 2
+theme = ExtResource( "1_t6d5m" )
 
 [node name="option" type="Button" parent="_groups/_buttoms"]
-offset_top = 12.0
+minimum_size = Vector2(0, 40)
+offset_top = 4.0
 offset_right = 600.0
-offset_bottom = 38.0
+offset_bottom = 44.0
+size_flags_vertical = 4
 mouse_default_cursor_shape = 2
-theme = SubResource( "Theme_d5cgw" )
+theme = SubResource( "Theme_d5hxd" )
+action_mode = 0
 text = "link"
+clip_text = true
 alignment = 0
 
 [node name="current-option" type="Button" parent="_groups/_buttoms"]
-offset_top = 42.0
+clip_contents = true
+minimum_size = Vector2(0, 40)
+offset_top = 48.0
 offset_right = 600.0
-offset_bottom = 68.0
+offset_bottom = 88.0
+size_flags_vertical = 4
 mouse_default_cursor_shape = 2
-theme = SubResource( "Theme_8a4g2" )
+theme = SubResource( "Theme_pevwi" )
+action_mode = 0
 text = "link"
+clip_text = true
 alignment = 0
 
 [node name="_text" type="VBoxContainer" parent="_groups"]
-offset_top = 86.0
+offset_top = 106.0
 offset_right = 600.0
-offset_bottom = 187.0
+offset_bottom = 207.0
 
 [node name="animated-title" type="RichTextLabel" parent="_groups/_text"]
 offset_right = 600.0
@@ -226,3 +233,10 @@ offset_bottom = 101.0
 theme = SubResource( "Theme_ctmp3" )
 text = "paragraph"
 autowrap_mode = 3
+
+[node name="ColorRect" type="ColorRect" parent="."]
+visible = false
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2

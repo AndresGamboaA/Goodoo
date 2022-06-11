@@ -8,7 +8,7 @@ var parent_control
 
 func _init(_type, _input={}):
 	type = _type
-	input = _input
+	input = _input.duplicate(true)
 	control = Node.new()
 	container = Node.new()
 	add_child(control)
@@ -25,8 +25,12 @@ func get_gui():
 
 
 func update_gui():
+#	print("before")
+#	print(Utils.dict_to_json(get_data()))
 	var next = gui()
 	Goodoo.diff(self.get_gui(), next)
+#	print("after")
+#	print(Utils.dict_to_json(get_data()))
 
 
 
