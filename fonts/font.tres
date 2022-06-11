@@ -1,0 +1,6 @@
+[gd_resource type="Font" load_steps=2 format=3 uid="uid://ceiqpl8fvl1ba"]
+
+[ext_resource type="FontData" uid="uid://be6arjsnp4kyx" path="res://fonts/Quicksand-Regular.ttf" id="1_q0eus"]
+
+[resource]
+data/0 = ExtResource( "1_q0eus" )

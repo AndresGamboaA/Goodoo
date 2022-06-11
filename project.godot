@@ -28,12 +28,24 @@ _global_script_classes=[{
 "class": &"CustomComponent",
 "language": &"GDScript",
 "path": "res://goodoo/custom_component.gd"
+}, {
+"base": "CustomComponent",
+"class": &"SideBar",
+"language": &"GDScript",
+"path": "res://components/sidebar.gd"
+}, {
+"base": "CustomComponent",
+"class": &"TopBar",
+"language": &"GDScript",
+"path": "res://components/topbar.gd"
 }]
 _global_script_class_icons={
 "App": "",
 "BasicComponent": "",
 "Component": "",
-"CustomComponent": ""
+"CustomComponent": "",
+"SideBar": "",
+"TopBar": ""
 }
 
 [application]

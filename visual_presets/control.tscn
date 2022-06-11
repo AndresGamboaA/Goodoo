@@ -1,4 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://bxmeflxwv6g45"]
+[gd_scene load_steps=17 format=3 uid="uid://bxmeflxwv6g45"]
+
+[ext_resource type="FontData" uid="uid://dubyq8xosm8yk" path="res://fonts/Quicksand-Bold.ttf" id="1_d0u2n"]
+[ext_resource type="Font" uid="uid://ceiqpl8fvl1ba" path="res://fonts/font.tres" id="2_i3cug"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wlofd"]
 bg_color = Color(0.207843, 0.235294, 0.6, 1)
@@ -6,19 +9,176 @@ bg_color = Color(0.207843, 0.235294, 0.6, 1)
 [sub_resource type="Theme" id="Theme_lq6a3"]
 PanelContainer/styles/panel = SubResource( "StyleBoxFlat_wlofd" )
 
-[node name="_Control" type="Control"]
+[sub_resource type="Font" id="Font_430p0"]
+data/0 = ExtResource( "1_d0u2n" )
+
+[sub_resource type="Theme" id="Theme_s1sgu"]
+default_font = SubResource( "Font_430p0" )
+RichTextLabel/font_sizes/bold_font_size = 44
+RichTextLabel/font_sizes/normal_font_size = 44
+
+[sub_resource type="Theme" id="Theme_htnfr"]
+default_font = ExtResource( "2_i3cug" )
+Label/font_sizes/font_size = 22
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dq3bs"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_tqyyd"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mnwnp"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gisof"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Theme" id="Theme_dxkiy"]
+Button/styles/focus = SubResource( "StyleBoxFlat_dq3bs" )
+Button/styles/hover = SubResource( "StyleBoxFlat_tqyyd" )
+Button/styles/normal = SubResource( "StyleBoxFlat_mnwnp" )
+Button/styles/pressed = SubResource( "StyleBoxFlat_gisof" )
+
+[sub_resource type="Theme" id="Theme_2iex8"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6wwb8"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_jm2sm"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+
+[sub_resource type="Theme" id="Theme_ar488"]
+Button/colors/font_color = Color(0.87451, 0.780392, 0.133333, 1)
+Button/colors/font_focus_color = Color(0.792157, 0.858824, 0.133333, 1)
+Button/styles/focus = SubResource( "StyleBoxFlat_6wwb8" )
+Button/styles/normal = SubResource( "StyleBoxFlat_jm2sm" )
+
+[node name="_Presets" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 theme = SubResource( "Theme_lq6a3" )
 
-[node name="center" type="CenterContainer" parent="."]
+[node name="_groups" type="VBoxContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_bottom = 99.0
+grow_horizontal = 2
+grow_vertical = 2
+metadata/_edit_layout_mode = 1
+
+[node name="_text" type="VBoxContainer" parent="_groups"]
+offset_right = 500.0
+offset_bottom = 90.0
+
+[node name="animated-title" type="RichTextLabel" parent="_groups/_text"]
+offset_right = 500.0
+offset_bottom = 55.0
+theme = SubResource( "Theme_s1sgu" )
+bbcode_enabled = true
+text = "[center][wave]Animated Title[/wave][/center]"
+fit_content_height = true
+
+[node name="paragraph" type="Label" parent="_groups/_text"]
+offset_top = 59.0
+offset_right = 500.0
+offset_bottom = 90.0
+theme = SubResource( "Theme_htnfr" )
+text = "Paragraph"
+
+[node name="_buttons" type="VBoxContainer" parent="_groups"]
+offset_top = 94.0
+offset_right = 500.0
+offset_bottom = 179.0
+
+[node name="button" type="Button" parent="_groups/_buttons"]
+offset_right = 500.0
+offset_bottom = 23.0
+theme = SubResource( "Theme_dxkiy" )
+text = "buttom"
+
+[node name="option" type="Button" parent="_groups/_buttons"]
+offset_top = 27.0
+offset_right = 500.0
+offset_bottom = 58.0
+theme = SubResource( "Theme_2iex8" )
+text = "option"
+
+[node name="current" type="Button" parent="_groups/_buttons"]
+offset_top = 62.0
+offset_right = 500.0
+offset_bottom = 85.0
+theme = SubResource( "Theme_ar488" )
+text = "current
+"
+
+[node name="_containers" type="VBoxContainer" parent="_groups"]
+clip_contents = true
+minimum_size = Vector2(0, 90)
+offset_top = 183.0
+offset_right = 500.0
+offset_bottom = 273.0
+
+[node name="control-cc-exp" type="Control" parent="_groups/_containers"]
+clip_contents = true
+offset_right = 500.0
+offset_bottom = 90.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="control-exp" type="Control" parent="_groups/_containers/control-cc-exp"]
+clip_contents = true
 anchor_right = 1.0
 anchor_bottom = 1.0
 
-[node name="rich" type="RichTextLabel" parent="center"]
-offset_left = 250.0
-offset_top = 175.0
-offset_right = 250.0
-offset_bottom = 175.0
-bbcode_enabled = true
-fit_content_height = true
+[node name="vbox-exp" type="VBoxContainer" parent="_groups/_containers/control-cc-exp"]
+clip_contents = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="vbox-cc-exp" type="VBoxContainer" parent="_groups/_containers/control-cc-exp/vbox-exp"]
+clip_contents = true
+offset_right = 500.0
+size_flags_horizontal = 3
+
+[node name="hbox-cc-exp" type="HBoxContainer" parent="_groups/_containers/control-cc-exp/vbox-exp"]
+clip_contents = true
+offset_top = 4.0
+offset_right = 500.0
+offset_bottom = 4.0
+size_flags_horizontal = 3
+
+[node name="margin-cc-exp" type="MarginContainer" parent="_groups/_containers/control-cc-exp/vbox-exp"]
+clip_contents = true
+offset_top = 8.0
+offset_right = 500.0
+offset_bottom = 32.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="scroll-cc-exp" type="ScrollContainer" parent="_groups/_containers/control-cc-exp/vbox-exp"]
+offset_top = 36.0
+offset_right = 500.0
+offset_bottom = 61.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="color-cc-exp" type="ColorRect" parent="_groups/_containers/control-cc-exp/vbox-exp"]
+offset_top = 65.0
+offset_right = 500.0
+offset_bottom = 90.0
+size_flags_horizontal = 3
+size_flags_vertical = 3
+
+[node name="hbox-exp" type="HBoxContainer" parent="_groups/_containers/control-cc-exp"]
+clip_contents = true
+anchor_right = 1.0
+anchor_bottom = 1.0
+
+[node name="sidebar-scroll" type="ScrollContainer" parent="_groups/_containers/control-cc-exp/hbox-exp"]
+offset_bottom = 90.0
+size_flags_vertical = 3
+
+[node name="color-exp" type="ColorRect" parent="_groups/_containers/control-cc-exp"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color(0.352941, 0.352941, 0.352941, 1)
