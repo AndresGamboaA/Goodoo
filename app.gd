@@ -17,32 +17,19 @@ func toggleSideBar():
 	update_gui()
 
 func handle_option_pressed(_name):
-	print(_name)
 	get_current_option().current = false
 	get_option(_name).current = true
 	update_gui()
 
-func get_current_option():
-	for option in state.options:
-		if option.current:
-			return option
-
-func get_option(_name):
-	for option in state.options:
-		if option.name == _name:
-			return option
-
 func current_page():
 	match get_current_option().name:
-		"Introduction":
-			return Introduction.new()
-		"Installation":
-			return Installation.new()
+		"Introduction": return Introduction.new()
+		"Installation": return Installation.new()
 
 func gui():
 	return\
 	Goo.vbox({preset="vbox-exp"},[
-		Goo.hbox({preset="hbox-cc-exp"},[
+		Goo.hbox({preset="hbox-cc-exp"},[ ## hbox-cc-exp = hboxContainer is a child of a container (cc) expand
 			SideBar.new({
 				visible=state.sideBarVisible, 
 				options=state.options,
@@ -54,3 +41,14 @@ func gui():
 			])
 		])
 	])
+
+
+func get_current_option():
+	for option in state.options:
+		if option.current:
+			return option
+
+func get_option(_name):
+	for option in state.options:
+		if option.name == _name:
+			return option
