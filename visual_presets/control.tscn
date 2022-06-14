@@ -9,6 +9,7 @@ bg_color = Color(0.207843, 0.235294, 0.6, 1)
 [sub_resource type="Theme" id="Theme_lq6a3"]
 PanelContainer/styles/panel = SubResource( "StyleBoxFlat_wlofd" )
 
+<<<<<<< HEAD
 [sub_resource type="Font" id="Font_430p0"]
 data/0 = ExtResource( "1_d0u2n" )
 
@@ -94,6 +95,13 @@ Button/styles/pressed = SubResource( "StyleBoxFlat_014ah" )
 [node name="_Presets" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
+=======
+[node name="_Control" type="Control"]
+offset_right = 500.0
+offset_bottom = 350.0
+grow_horizontal = 2
+grow_vertical = 2
+>>>>>>> main
 theme = SubResource( "Theme_lq6a3" )
 
 [node name="_groups" type="VBoxContainer" parent="."]
@@ -116,6 +124,7 @@ bbcode_enabled = true
 text = "[center][wave]Animated Title[/wave][/center]"
 fit_content_height = true
 
+<<<<<<< HEAD
 [node name="paragraph" type="Label" parent="_groups/_text"]
 offset_top = 59.0
 offset_right = 650.0
@@ -285,3 +294,14 @@ horizontal_scroll_mode = 3
 anchor_right = 1.0
 anchor_bottom = 1.0
 color = Color(0.352941, 0.352941, 0.352941, 1)
+=======
+[node name="_VBoxContainer" type="HFlowContainer" parent="."]
+offset_right = 507.0
+offset_bottom = 346.0
+
+[node name="Button" type="Button" parent="_VBoxContainer"]
+offset_right = 18.0
+offset_bottom = 31.0
+size_flags_horizontal = 2
+text = "1"
+>>>>>>> main
