@@ -28,20 +28,17 @@ func current_page():
 
 func gui():
 	return\
-	Goo.vbox({preset="vbox-exp"},[
-		Goo.hbox({preset="hbox-cc-exp"},[ ## hbox-cc-exp = hboxContainer is a child of a container (cc) expand
-			SideBar.new({
-				visible=state.sideBarVisible, 
-				options=state.options,
-				on_option_pressed=handle_option_pressed
-			}),
-			Goo.vbox({preset="vbox-cc-exp"},[
-				TopBar.new({on_menu_buttom_toggled=toggleSideBar}),
-				current_page()
-			])
+	Goo.hbox({preset="hbox-exp"},[ ## hbox-cc-exp = hboxContainer is a child of a container (cc) expand
+		SideBar.new({
+			visible=state.sideBarVisible, 
+			options=state.options,
+			on_option_pressed=handle_option_pressed
+		}),
+		Goo.vbox({preset="vbox-cc-exp"},[
+			TopBar.new({on_menu_buttom_toggled=toggleSideBar}),
+			current_page()
 		])
 	])
-
 
 func get_current_option():
 	for option in state.options:
