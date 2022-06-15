@@ -13,8 +13,8 @@ func toggle_menu():
 
 func gui():
 	return\
-	Goo.control({"preset":"control-cc-exp-h","minimum_size":Vector2(0,30)},[
-		Goo.hbox({"preset":"hbox-exp"},[
+	Goo.control({"preset":"fill-h","minimum_size":Vector2(0,30)},[
+		Goo.hbox({"preset":"full"},[
 			Goo.margin({minimum_size=Vector2(10,0)}),
 			Goo.button({
 				"preset":"button "+ "icon-close-menu" if state.menu_open else "icon-menu",

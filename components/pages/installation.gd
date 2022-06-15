@@ -21,7 +21,7 @@ func gui():
 				Goo.margin({minimum_size=Vector2(0,20)}),
 				Goo.label({
 					preset="paragraph", 
-					text="Goodoo makes it painless to create interactive UIs. Design simple views for each state in your application, and Goodoo will efficiently update and render just the right components when your data changes. Declarative views make your code more predictable and easier to debug."
+					text="git clone https://github.com/AndresGamboaA/Goodoo.git"
 				})
 			]),
 		])

@@ -24,6 +24,11 @@ _global_script_classes=[{
 "language": &"GDScript",
 "path": "res://goodoo/component.gd"
 }, {
+"base": "CustomComponent",
+"class": &"Counter",
+"language": &"GDScript",
+"path": "res://components/counter.gd"
+}, {
 "base": "Component",
 "class": &"CustomComponent",
 "language": &"GDScript",
@@ -53,6 +58,7 @@ _global_script_class_icons={
 "App": "",
 "BasicComponent": "",
 "Component": "",
+"Counter": "",
 "CustomComponent": "",
 "Installation": "",
 "Introduction": "",

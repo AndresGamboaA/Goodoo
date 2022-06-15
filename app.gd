@@ -9,6 +9,10 @@ func _init():
 		options=[
 			{name="Introduction", current=true},
 			{name="Installation", current=false},
+			{name="Set Up", current=false},
+			{name="Components", current=false},
+			{name="  Basic Components", current=false},
+			{name="  Custom Components", current=false},
 		]
 	}
 
@@ -28,13 +32,13 @@ func current_page():
 
 func gui():
 	return\
-	Goo.hbox({preset="hbox-exp"},[ ## hbox-cc-exp = hboxContainer is a child of a container (cc) expand
+	Goo.hbox({preset="full"},[
 		SideBar.new({
 			visible=state.sideBarVisible, 
 			options=state.options,
 			on_option_pressed=handle_option_pressed
 		}),
-		Goo.vbox({preset="vbox-cc-exp"},[
+		Goo.vbox({preset="fill"},[
 			TopBar.new({on_menu_buttom_toggled=toggleSideBar}),
 			current_page()
 		])

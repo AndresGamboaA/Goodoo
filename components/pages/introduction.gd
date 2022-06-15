@@ -16,23 +16,38 @@ func ready():
 func gui():
 	return\
 	Goo.scrollbox({"preset":"scroll-cc-exp","id":"scroll"},[
-		Goo.margin({"preset":"margin-cc-exp-h", "minimum_size":Vector2(100,0)},[
+		Goo.margin({"preset":"margin-cc-exp-h", "minimum_size":Vector2(400,0)},[
 			Goo.vbox({"preset":"vbox-cc-exp-h"},[
 				Goo.rich_label({"preset":"animated-title","text":"[center][wave]Goodoo[/wave][/center]"}),
 				Goo.margin({minimum_size=Vector2(0,20)}),
-				Goo.label({"preset":"paragraph", "text":"Goodoo is a UI library written in Gdscript to build interactive user interfaces. It is heavelly inspired by class components in React. It works by rendering and updating your GUI based on a state. When you change data in the state, call the update_gui function and Goodoo will update all the control nodes that need to change."}),
+				Goo.label({"preset":"paragraph", "text":"Goodoo is a UI library written in Gdscript to build interactive user interfaces. It is strongly inspired by class components of React. It works by rendering and updating your GUI based on a state. When you change data in the state, call the update_gui function and Goodoo will update all the control nodes that need to change."}),
 				Goo.margin({minimum_size=Vector2(0,40)}),
 				Goo.label({"preset":"subtitle", "text":"Why to use Goodoo?"}),
 				Goo.margin({minimum_size=Vector2(0,20)}),
-				Goo.label({"preset":"paragraph", "text":"Using control nodes and conecting its signals may work fine for most GUIs in videogames, but it can be painful when creating a complex appliation using Godot."}),
+				Goo.label({"preset":"paragraph", "text":"Using control nodes and conecting its signals may work fine for most GUIs for videogames, but it can be painful when creating a complex application using Godot."}),
 				Goo.margin({minimum_size=Vector2(0,40)}),
 				Goo.label({"preset":"subtitle", "text":"Create reusable components"}),
 				Goo.margin({minimum_size=Vector2(0,20)}),
-				Goo.label({preset="paragraph", text="Goodoo makes easy to integrate a component multiple times through your project."}),
+				Goo.label({preset="paragraph", text="Goodoo makes easy to integrate a component multiple times in your project."}),
+				Goo.margin({minimum_size=Vector2(0,20)}),
+				Counter.new(),
+				Counter.new(),
 				Goo.margin({minimum_size=Vector2(0,40)}),
 				Goo.label({"preset":"subtitle", "text":"Presets"}),
 				Goo.margin({minimum_size=Vector2(0,20)}),
-				Goo.label({preset="paragraph", text="Presets are predefined properties of control nodes that can be use to easelly styled your components."}),
+				Goo.label({preset="paragraph", text="Presets are predefined properties of control nodes that can be use to easilly styled your components."}),
+				Goo.margin({minimum_size=Vector2(0,40)}),
+				Goo.center({preset="fill-h"},[
+					Goo.button({preset="blue", text="Blue"}),
+				]),
+				Goo.margin({minimum_size=Vector2(0,10)}),
+				Goo.center({preset="fill-h"},[
+					Goo.button({preset="red", text="Red"}),
+				]),
+				Goo.margin({minimum_size=Vector2(0,10)}),
+				Goo.center({preset="fill-h"},[
+					Goo.button({preset="green", text="Green"}),
+				]),
 				Goo.margin({minimum_size=Vector2(0,40)}),
 				Goo.label({"preset":"subtitle", "text":"About this app"}),
 				Goo.margin({minimum_size=Vector2(0,20)}),
