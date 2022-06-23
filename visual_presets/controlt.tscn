@@ -1,7 +1,7 @@
 [gd_scene load_steps=31 format=3 uid="uid://bxmeflxwv6g45"]
 
-[ext_resource type="FontData" uid="uid://dubyq8xosm8yk" path="res://fonts/Quicksand-Bold.ttf" id="1_d0u2n"]
-[ext_resource type="Font" uid="uid://ceiqpl8fvl1ba" path="res://fonts/font.tres" id="2_i3cug"]
+[ext_resource type="FontData" uid="uid://dubyq8xosm8yk" path="res://fonts/Quicksand-Bold.ttf" id="1_fks42"]
+[ext_resource type="Font" uid="uid://ceiqpl8fvl1ba" path="res://fonts/font.tres" id="2_fmcq6"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_wlofd"]
 bg_color = Color(0.207843, 0.235294, 0.6, 1)
@@ -10,7 +10,7 @@ bg_color = Color(0.207843, 0.235294, 0.6, 1)
 PanelContainer/styles/panel = SubResource( "StyleBoxFlat_wlofd" )
 
 [sub_resource type="Font" id="Font_430p0"]
-data/0 = ExtResource( "1_d0u2n" )
+data/0 = ExtResource( "1_fks42" )
 
 [sub_resource type="Theme" id="Theme_s1sgu"]
 default_font = SubResource( "Font_430p0" )
@@ -18,7 +18,7 @@ RichTextLabel/font_sizes/bold_font_size = 35
 RichTextLabel/font_sizes/normal_font_size = 44
 
 [sub_resource type="Theme" id="Theme_htnfr"]
-default_font = ExtResource( "2_i3cug" )
+default_font = ExtResource( "2_fmcq6" )
 Label/font_sizes/font_size = 14
 
 [sub_resource type="Theme" id="Theme_ul0rk"]
@@ -59,7 +59,7 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="Theme" id="Theme_2iex8"]
-default_font = ExtResource( "2_i3cug" )
+default_font = ExtResource( "2_fmcq6" )
 Button/colors/font_hover_color = Color(0.980392, 0.666667, 0.215686, 1)
 Button/font_sizes/font_size = 15
 Button/styles/focus = SubResource( "StyleBoxFlat_3qhxv" )
@@ -80,7 +80,7 @@ bg_color = Color(0.6, 0.6, 0.6, 0)
 bg_color = Color(0.6, 0.6, 0.6, 0)
 
 [sub_resource type="Theme" id="Theme_ar488"]
-default_font = ExtResource( "2_i3cug" )
+default_font = ExtResource( "2_fmcq6" )
 Button/colors/font_color = Color(0.980392, 0.666667, 0.215686, 1)
 Button/colors/font_focus_color = Color(0.980392, 0.666667, 0.215686, 1)
 Button/colors/font_hover_color = Color(0.980392, 0.666667, 0.215686, 1)
