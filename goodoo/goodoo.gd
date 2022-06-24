@@ -362,7 +362,7 @@ func set_property(node:Control, properties:Dictionary, key:String, child_of_cont
 			node.add_theme_constant_override("margin_left", properties[key])
 			node.add_theme_constant_override("margin_top", properties[key])
 			node.add_theme_constant_override("margin_bottom", properties[key])
-	if key == "theme" or key=="icon":
+	if properties[key] is Resource:
 		node[key] = properties[key]
 	elif node.get(key) != null:
 		node[key] = properties[key]

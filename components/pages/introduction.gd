@@ -30,6 +30,7 @@ func gui():
 				Goo.margin({minimum_size=Vector2(0,20)}),
 				Goo.label({preset="paragraph", text="Goodoo makes easy to integrate a component multiple times in your project."}),
 				Goo.margin({minimum_size=Vector2(0,20)}),
+				Code.new({gdscript=true, text='func gui():\n\treturn Goo.vbox({preset="fill-h"},[\n\t\tCounter.new(),\n\t\tCounter.new()\n\t])'}),
 				Counter.new(),
 				Counter.new(),
 				Goo.margin({minimum_size=Vector2(0,40)}),
@@ -37,6 +38,7 @@ func gui():
 				Goo.margin({minimum_size=Vector2(0,20)}),
 				Goo.label({preset="paragraph", text="Presets are predefined properties of control nodes that can be use to easilly styled your components."}),
 				Goo.margin({minimum_size=Vector2(0,40)}),
+				Code.new({gdscript=true, text='Goo.button({preset="blue", text="blue"}),\nGoo.button({preset="red", text="red"}),\nGoo.button({preset="green", text="Green"})'}),
 				Goo.center({preset="fill-h"},[
 					Goo.button({preset="blue", text="Blue"}),
 				]),

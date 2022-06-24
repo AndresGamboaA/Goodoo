@@ -15,13 +15,13 @@ func updated():
 		var tween = scroll.create_tween()
 		tween.set_parallel(true)
 		visible = true
-		tween.tween_property(scroll, "minimum_size:x", 200.0, 0.3).from(0.0).set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(scroll, "minimum_size:x", 220.0, 0.3).from(0.0).set_trans(Tween.TRANS_CUBIC)
 		tween.tween_property(scroll.get_child(1), "modulate:a", 1.0, 0.3).from(0.0).set_trans(Tween.TRANS_CUBIC)
 	elif not input.visible:
 		var tween = scroll.create_tween()
 		tween.set_parallel(true)
 		visible = false
-		tween.tween_property(scroll, "minimum_size:x", 0.0, 0.3).from(200.0).set_trans(Tween.TRANS_CUBIC)
+		tween.tween_property(scroll, "minimum_size:x", 0.0, 0.3).from(220.0).set_trans(Tween.TRANS_CUBIC)
 		tween.tween_property(scroll.get_child(1), "modulate:a", 0.0, 0.3).from(1.0).set_trans(Tween.TRANS_CUBIC)
 
 
