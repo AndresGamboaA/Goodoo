@@ -5,15 +5,28 @@ class_name CustomComponent
 var state:Dictionary
 var container
 var parent_control
+var key = null
 
-func _init(_type, _input={}):
+func _init(_type:String, _input:Dictionary={}):
 	type = _type
 	input = _input.duplicate(true)
+	if input.has("key"):
+		key = input.key
 	control = Node.new()
 	container = Node.new()
 	add_child(control)
 	add_child(container)
 
+# Lifecycle methods
+func ready():
+	pass
+
+func updated():
+	pass
+
+func will_die():
+	pass
+# __________________
 
 func complete():
 	# creates the component tree based on its render method
@@ -27,8 +40,7 @@ func get_gui():
 func update_gui():
 	var next = gui()
 	Goodoo.diff(self.get_gui(), next)
-
-
+	updated()
 
 func gui():
 	pass

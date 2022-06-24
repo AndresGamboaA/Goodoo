@@ -8,7 +8,6 @@ func add_preset(preset_name:String,node:Control):
 
 
 func get_preset(preset_name:String):
-	print(preset_name)
 	assert(presets.has(preset_name), "A preset not defined has been assigned to a component.")
 	return presets[preset_name]
 	
@@ -37,7 +36,71 @@ func initialize_presets():
 	presets["v-center-w"] = { anchors_preset = 13,clip_contents = true }
 	presets["h-center-w"] = { anchors_preset = 14,clip_contents = true }
 	presets["full"] = { anchors_preset = 15,clip_contents = true }
-	
+
+	presets["top-left"] = { 
+		anchors_preset = 0,
+		clip_contents = true
+	}
+	presets["top-right"] = { 
+		anchors_preset = 1,
+		clip_contents = true
+	}
+	presets["bottom-right"] = { 
+		anchors_preset = 2,
+		clip_contents = true
+	}
+	presets["bottom-left"] = { 
+		anchors_preset = 3,
+		clip_contents = true
+	}
+	presets["top-left"] = { 
+		anchors_preset = 4,
+		clip_contents = true
+		}
+	presets["center-left"] = { 
+		anchors_preset = 5,
+		clip_contents = true
+	}
+	presets["center-top"] = { 
+		anchors_preset = 6,
+		clip_contents = true
+	}
+	presets["center-left"] = { 
+		anchors_preset = 7,
+	clip_contents = true
+	}
+	presets["center-bottom"] = { 
+		anchors_preset = 8,
+		clip_contents = true
+	}
+	presets["left-w"] = { 
+		anchors_preset = 9,
+		clip_contents = true
+	}
+	presets["top-w"] = { 
+		anchors_preset = 10,
+		clip_contents = true
+	}
+	presets["right-w"] = { 
+		anchors_preset = 11,
+		clip_contents = true
+	}
+	presets["bottom-w"] = { 
+		anchors_preset = 12,
+		clip_contents = true
+	}
+	presets["v-center-w"] = { 
+		anchors_preset = 13,
+		clip_contents = true}
+	presets["h-center-w"] = { 
+		anchors_preset = 14,
+		clip_contents = true
+	}
+	presets["full"] = { 
+		anchors_preset = 15,
+		clip_contents = true
+	}
+
 	# child of containers
 	presets["fill-h"] = {
 		size_flags_horizontal = 1,
@@ -54,8 +117,7 @@ func initialize_presets():
 		size_flags_vertical = 3,
 		clip_contents = true
 	}
-	
-	print(Utils.dict_to_json(presets))
+
 func create_presets_from_control(node:Control):
 	if not str(node.name).begins_with("_"):
 		add_preset(node.name, node)
@@ -68,6 +130,8 @@ func create_presets_from_control(node:Control):
 func control(properties={}, children=[]):
 	return BasicComponent.new(properties, "control", children)
 
+func nothing():
+	return BasicComponent.new({visible=false}, "control", [])
 
 # Containers
 func container(properties={}, children=[]):

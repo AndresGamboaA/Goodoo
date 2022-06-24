@@ -16,19 +16,23 @@ func _init():
 		]
 	}
 
+
 func toggleSideBar():
 	state.sideBarVisible = not state.sideBarVisible
 	update_gui()
 
 func handle_option_pressed(_name):
-	get_current_option().current = false
-	get_option(_name).current = true
+	state.options.filter(func(item): return item.current )[0].current = false
+	state.options.filter(func(item): return item.name==_name)[0].current = true
 	update_gui()
 
 func current_page():
-	match get_current_option().name:
+	var current_option = state.options.filter(func(item): return item.current )[0]
+	match current_option.name:
 		"Introduction": return Introduction.new()
 		"Installation": return Installation.new()
+		_:              return Goo.nothing()
+
 
 func gui():
 	return\
@@ -43,13 +47,3 @@ func gui():
 			current_page()
 		])
 	])
-
-func get_current_option():
-	for option in state.options:
-		if option.current:
-			return option
-
-func get_option(_name):
-	for option in state.options:
-		if option.name == _name:
-			return option

@@ -84,4 +84,3 @@ Presets="*res://presets.gd"
 
 window/size/viewport_width=650
 window/size/viewport_height=450
-window/vsync/vsync_mode=0

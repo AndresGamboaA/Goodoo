@@ -53,7 +53,7 @@ func change_basic_for_custom(current:BasicComponent, next:CustomComponent):
 	next.ready()
 
 func change_custom_for_basic(current:CustomComponent, next:BasicComponent):
-	
+	current.will_die()
 	for child in current.get_gui().control.get_children():
 		child.queue_free()
 		
@@ -63,6 +63,9 @@ func change_custom_for_basic(current:CustomComponent, next:BasicComponent):
 		var old = current.get_gui().control
 		var child_of_container = old.get_parent() is Container
 		var new = create_control(next.type, next.input,child_of_container)
+		if old is ScrollContainer:
+			old.get_h_scroll_bar().queue_free()
+			old.get_v_scroll_bar().queue_free()
 		current.get_gui().control.replace_by(new)
 		old.queue_free()
 		next_control = new
@@ -72,16 +75,18 @@ func change_custom_for_basic(current:CustomComponent, next:BasicComponent):
 	for child in next.get_children():
 		render(current.get_gui().control, child)
 	
-	
 	next.get_parent().remove_child(next)
-	current.container.free()
-	current.control.free()
+	
+	current.container.queue_free()
+	current.control.queue_free()
 	current.replace_by(next)
+	
 	next.control = next_control
 	current.queue_free()
 
 
 func diff_basic(current:BasicComponent, next:BasicComponent):
+	# Checks if a the current basicComponent has changed and updates it if that is the case.
 	if current.type != next.type:
 		change_basic_for_dif_basic(current, next)
 		return
@@ -90,15 +95,17 @@ func diff_basic(current:BasicComponent, next:BasicComponent):
 	
 	var current_children = current.get_children()
 	var next_children = next.get_children()
-	look_for_new_children(current,next)
 	
-	for i in range(0,  min(current_children.size(), next_children.size())):
-		diff(current_children[i], next_children[i])
+	for i in range(0,  current_children.size()):
+		if next_children[i].type != "_omit_":
+			diff(current_children[i], next_children[i])
+			
 	next.queue_free()
 
 
 func diff_custom(current:CustomComponent, next:CustomComponent):
 	if current.type != next.type:
+		current.will_die()
 		change_custom_for_dif_custom(current, next)
 	elif current.input.hash() != next.input.hash():
 		update_custom(current, next)
@@ -165,6 +172,53 @@ func update_basic(current:BasicComponent, next:BasicComponent):
 	var child_of_container = current.control.get_parent() is Container
 	set_properties(current.control, current.input, next.input,child_of_container)
 	current.input = next.input
+	
+	if current.list:
+		update_list(current, next)
+
+
+func update_list(current:BasicComponent, next:BasicComponent):
+	var aux = {}
+	var current_children = current.get_children()
+	var next_children = next.get_children()
+	
+	for i in range(0, current_children.size()):
+		var current_ch = current_children[i]
+		if current_ch is BasicComponent:
+			current.control.remove_child(current_ch.control)
+		else:
+			current.control.remove_child(current_ch.get_gui().control)
+		current.remove_child(current_ch)
+		aux[current_ch.key] = current_ch
+	
+	for i in range(0, next_children.size()):
+		var next_ch = next_children[i]
+		if aux.has(next_ch.key):
+			var current_ch = aux[next_ch.key]
+			current.add_child(current_ch)
+			if current_ch is BasicComponent:
+				current.control.add_child(current_ch.control)
+			else:
+				current.control.add_child(current_ch.get_gui().control)
+			aux.erase(next_ch.key)
+		else:
+			var next_ch_children = []
+			for child in next_ch.get_children():
+				next_ch_children.append(child)
+				next_ch.remove_child(child)
+			next_ch.replace_by(BasicComponent.new({}, "_omit_", []))
+			current.add_child(next_ch)
+			for child in next_ch_children:
+				next_ch.add_child(child)
+			render(current.control, next_ch)
+			
+	for key in aux.keys():
+		if aux[key] is BasicComponent:
+			aux[key].control.queue_free()
+		else:
+			aux[key].will_die()
+			aux[key].get_gui().control.queue_free()
+		aux[key].queue_free()
 
 
 func update_custom(current:CustomComponent, next:CustomComponent):
@@ -198,9 +252,8 @@ func look_for_new_children(current:BasicComponent, next:BasicComponent) -> void:
 
 func render(parent:Control, component:Component) -> void:
 	# Renders the component to the scene
-	if component is BasicComponent:
-		var child_of_container = parent is Container
-		component.control = create_control(component.type, component.input,child_of_container)
+	if component is BasicComponent: 
+		component.control = create_control(component.type, component.input, parent is Container)
 		parent.add_child(component.control)
 		for child in component.get_children():
 			render(component.control, child)
@@ -233,7 +286,9 @@ func create_control(type:String, properties:Dictionary,child_of_container) -> Co
 		"scrollbox"      :node = ScrollContainer.new()
 		"subviewport"    :node = SubViewportContainer.new()
 		"tabbox"         :node = TabContainer.new()
-		"button"         :node = Button.new()
+		"button"         :
+			node = Button.new()
+			node.action_mode = BaseButton.ACTION_MODE_BUTTON_PRESS
 		"link_button"    :node = LinkButton.new()
 		"texture_button" :node = TextureButton.new()
 		"text_edit"      :node = TextEdit.new()
@@ -267,16 +322,18 @@ func create_control(type:String, properties:Dictionary,child_of_container) -> Co
 func set_properties(node:Control, last_properties, properties:Dictionary,child_of_container) -> void:
 	for key in properties.keys():
 		if key == "id": continue
+		if key == "key": continue
+		if key == "list": continue
 		if key == "preset":
 			if last_properties.has("preset"):
 				if last_properties["preset"] == properties["preset"]:
 					return
 			var presets = properties.preset.split(" ")
-			var last_p = []
-			if last_properties.has("preset"):
-				last_p = last_properties.preset.split(" ")
+#			var last_p = []
+#			if last_properties.has("preset"):
+#				last_p = last_properties.preset.split(" ")
 			for preset in presets:
-				if last_p.count(preset) > 0: continue
+#				if last_p.count(preset) > 0: continue
 				if Goo.get_preset(preset):
 					set_preset(node,preset,child_of_container)
 		

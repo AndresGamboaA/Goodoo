@@ -17,7 +17,8 @@ func gui():
 		Goo.hbox({"preset":"full"},[
 			Goo.margin({minimum_size=Vector2(10,0)}),
 			Goo.button({
-				"preset":"button "+ "icon-close-menu" if state.menu_open else "icon-menu",
+				"preset":"button " + "icon-close-menu" if state.menu_open else "icon-menu",
+				"hint_tooltip": "Toggle sidebar",
 				"on_pressed":toggle_menu,
 			})
 		])

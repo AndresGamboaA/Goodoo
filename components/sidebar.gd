@@ -11,7 +11,6 @@ func ready():
 	scroll = get_control("scroll")
 
 func updated():
-	print(input.options)
 	if input.visible and not visible:
 		var tween = scroll.create_tween()
 		tween.set_parallel(true)
